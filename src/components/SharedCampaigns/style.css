@@ -1,0 +1,31 @@
+/* Custom styles for modals */
+.bg-navy {
+  background-color: #0d236e;
+}
+
+.text-customBlue {
+  color: #0d236e;
+}
+
+.border-colorBlue {
+  border-color: #0d236e;
+}
+
+/* Ensure modals have proper z-index */
+.modal-overlay {
+  z-index: 50;
+}
+
+/* Animation for modals */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fixed {
+  animation: fadeIn 0.2s ease-in-out;
+}
