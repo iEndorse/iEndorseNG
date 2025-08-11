@@ -3,7 +3,7 @@ import logo from '../svg/logo.svg';
 import facebook from '../svg/facebook.svg';
 import instagram from '../svg/instagram.svg';
 import { baseURL } from '../URL';
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { useNavigate, Link } from 'react-router-dom';
 import { Audio, LineWave } from 'react-loader-spinner';
 

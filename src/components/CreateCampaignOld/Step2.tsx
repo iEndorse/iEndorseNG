@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import AgeModal from "./Modals/AgeModal"
-import { toast } from "react-toastify"
+import { toast } from "sonner"
 import blueclose from "../svg/blueclose.svg"
 import caret from "../svg/caret.svg"
 import add from "../svg/add.svg"

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import upload from '../svg/upload.svg';
 import AgeModal from './AgeModal';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 import blueclose from '../svg/blueclose.svg';
 import caret from '../svg/caret.svg'
 import add from '../svg/add.svg'

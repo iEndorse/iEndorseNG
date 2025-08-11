@@ -11,7 +11,6 @@ import NewPasword from './components/authentication/NewPassword';
 // import { Verify } from 'crypto';
 import VerifyEmail from './components/authentication/VerifyEmail';
 import ViewCampaign from './components/ViewCampaign/ViewCampaign';
-import 'react-toastify/dist/ReactToastify.css';
 import Notifications from './components/Notifications/Notifications';
 import Search from './components/Search';
 import CreateCampaign from './components/CreateCampaign/CreateCampaign';
@@ -43,11 +42,11 @@ function App() {
   return (
     <>
       <Router>
-            <Toaster richColors position="bottom-left" />
+            <Toaster richColors position="top-right" />
         <Routes>
 
           {/* Protected routes
-          <ProtectedRoute>  
+           >  
             <Route path='/CreateCampaign' element={<CreateCampaign />} />
             <Route path='/UserProfile' element={<UserProfile />} />
             <Route path='/Wallet' element={<Wallet />} />

@@ -4,7 +4,7 @@ import type React from "react"
 import { useEffect, useState } from "react"
 import close from "../svg/close.svg"
 import { baseURL } from "../URL"
-// import { toast } from "react-toastify"
+
 import { LineWave } from "react-loader-spinner"
 import Select from "react-select"
 import { toast } from "sonner"
@@ -35,11 +35,17 @@ const BankDetails: React.FC<BankDetailsProps> = ({ isOpen, onClose, onProceed, d
   const [isValidating, setIsValidating] = useState(false)
   const [validationError, setValidationError] = useState<string>("")
   const [isAccountVerified, setIsAccountVerified] = useState(false)
+  const [ID, setID] = useState<string>("")
 
   const userData = JSON.parse(localStorage.getItem("userData") as string)
   const userId = userData.id
 
   const validateAccountNumber = async () => {
+    //only do this if the the user is editing
+    if (!isEditing) {
+      setIsAccountVerified(true)
+      return
+    }
     if (!bankAccountNumber || !selectedBank) {
       setValidationError("Please enter account number and select a bank first.")
       return
@@ -164,6 +170,7 @@ const BankDetails: React.FC<BankDetailsProps> = ({ isOpen, onClose, onProceed, d
         })
         setHasExistingDetails(true)
         setIsEditing(false) // Initially show as read-only when there are existing details
+        setID(responseData.data.id)
       } else {
         setHasExistingDetails(false)
         setIsEditing(true) // Always in edit mode when no existing details
@@ -195,7 +202,7 @@ const BankDetails: React.FC<BankDetailsProps> = ({ isOpen, onClose, onProceed, d
           Authorization: `Bearer ${window.localStorage.getItem("token")}`,
         },
         body: JSON.stringify({
-          id: userId,
+          id:  hasExistingDetails ? ID : undefined, // Include ID only if updating
           bankName: selectedBank?.label,
           bankAccountNumber: bankAccountNumber,
           bankAccountName: bankAccountName,
@@ -310,8 +317,16 @@ const BankDetails: React.FC<BankDetailsProps> = ({ isOpen, onClose, onProceed, d
                   className={`w-full py-2 px-3 text-sm rounded-md border text-gray-900 
                   ${!isEditing ? "bg-gray-100" : ""}`}  
                 >
-                  {bankAccountName || "Account Name"}
+                 {isValidating ? (
+                    <div className="flex items-center">
+                      <LineWave height="16" width="16" color="#000" ariaLabel="loading" />
+                      
                 </div>
+                  ) : (
+                    <span>{bankAccountName || "Account Name"}</span>
+                  )}
+                </div>
+              
                 {/* {isAccountVerified && <p className="text-green-600 text-xs mt-1">✓ Account name verified</p>} */}
               </div>
             </div>

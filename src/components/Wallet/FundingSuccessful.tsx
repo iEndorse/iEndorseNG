@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import close from '../svg/close.svg';
 import greenCheck from '../svg/greenCheck.svg'
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 import Wallet from '../Wallet/Wallet';
 import useFetch from '../Hooks/useFetch';
 import { baseURL } from '../URL';

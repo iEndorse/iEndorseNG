@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import { isAuthenticated } from "../authentication/auth";
 import DefaultNav from './DefaultNav';
 import GuestNavbar from "./GuestNavBar";

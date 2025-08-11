@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import close from '../svg/close.svg';
-import { toast } from "react-toastify";
+import { toast } from "sonner";
  
 
 interface RedeemPointsProps {

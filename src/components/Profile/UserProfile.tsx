@@ -6,7 +6,7 @@ import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import Navbar from "../NavBar/Navbar"
 import { baseURL } from "../URL"
-import { toast } from "react-toastify"
+import { toast } from "sonner"
 import { Puff } from "react-loader-spinner"
 
 

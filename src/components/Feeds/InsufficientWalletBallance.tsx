@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import close from '../svg/close.svg';
 import insufficient from '../svg/insufficient.svg'
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 
 interface InsufficientWalletBalanceModalProps  {
   isOpen: boolean;

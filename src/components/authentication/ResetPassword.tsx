@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 import logo from '../svg/logo.svg';
 import facebook from '../svg/facebook.svg';
 import instagram from '../svg/instagram.svg';

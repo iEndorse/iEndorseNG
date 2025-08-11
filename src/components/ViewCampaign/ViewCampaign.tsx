@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+import { Play, Pause } from "lucide-react"
+import { toast } from "sonner";
 import CampaignMenu from "./CampaignMenu";
 import EndorseCampaignModal from "../Modals/EndorseCampaignModal";
 import link from '../svg/link.svg';
@@ -37,6 +38,9 @@ import TikTokVideoPlayer from "../tiktokVideoplayer"
 
 const ViewCampaign = ({ item }: any) => {
   const { uid } = useParams();
+    const videoRef = useRef<HTMLVideoElement>(null)
+    const [isPlaying, setIsPlaying] = useState(false);
+     const [showControls, setShowControls] = useState(true)
   const [isLoaded, setIsLoaded] = useState(false);
   const [endorseMenu, setEndorseMenu] = useState(false);
   const [reportMenu, setReportMenu] = useState(false)
@@ -238,6 +242,16 @@ const ViewCampaign = ({ item }: any) => {
     window.scrollTo(0, 0);
   }, []);
 
+  const togglePlayPause = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause()
+      } else {
+        videoRef.current.play()
+      }
+      setIsPlaying(!isPlaying)
+    }
+  }
 
  
   return (
@@ -339,26 +353,38 @@ const ViewCampaign = ({ item }: any) => {
             className="flex items-center justify-center bg-black w-full h-[300px] rounded-lg"
           >
             {file.filePath.endsWith('.mp4') ? (
-                   <TikTokVideoPlayer
-            src="/placeholder.mp4?height=600&width=400&query=vertical video content"
-            className="w-full aspect-[9/16] max-h-[600px]"
-          />
-              // <video 
-               
-               
-              //   muted 
-              //   onLoad={() => setIsLoaded(true)}
-              //   className={`w-full max-h-full object-cover transition-all duration-500 ${isLoaded ? "blur-md" : ""}`}
-              //   playsInline
-              //   autoPlay
-              //   loop
-              //   controls
-              //   style={{ borderRadius: '0.5rem' }} // Add border radius to video
-                
-              // >
-              //   <source src={file.filePath} type="video/mp4" />
-              //   Your browser does not support the video tag.
-              // </video>
+              <div className="relative w-full h-full group">
+                    <video
+                      ref={videoRef}
+                      className="w-full h-full object-cover rounded-lg"
+                      src={file.filePath}
+                      controls={false}
+                      onMouseEnter={() => setShowControls(true)}
+                      onMouseLeave={() => setShowControls(false)}
+                    />
+                    {/* Clickable overlay for play/pause */}
+                    <div
+                      className="absolute inset-0 flex items-center justify-center cursor-pointer z-10"
+                      onClick={togglePlayPause}
+                    >
+                      {/* Center play/pause button - shows on hover or when paused */}
+                      <div
+                        className={`transition-opacity duration-300 ${isPlaying && showControls ? "opacity-0 group-hover:opacity-100" : "opacity-100"}`}
+                      >
+                        <button
+                          className="flex items-center justify-center w-16 h-16 bg-black bg-opacity-50 rounded-full hover:bg-opacity-70 transition-all"
+                          onClick={togglePlayPause}
+                        >
+                          {isPlaying ? (
+                            <Pause className="w-8 h-8 text-white" />
+                          ) : (
+                            <Play className="w-8 h-8 text-white ml-1" />
+                          )}
+                        </button>
+                      </div>
+                    </div>
+                 
+                  </div>
             ) : (
               <img 
                 src={file.filePath} 
@@ -380,7 +406,7 @@ const ViewCampaign = ({ item }: any) => {
                     </button>
                   </div>
                   <div className="flex items-center w-full">
-                    <button className="p-3 bg-customBlue   text-xs  text-white rounded-md w-full" onClick={openEndorseMenu} >Endorse Campaign</button>
+                    <button className="p-3 bg-customBlue   text-xs  text-white rounded-md w-full" onClick={openEndorseMenu} >Promote Campaign</button>
                   </div>
                 </div>
               </div>

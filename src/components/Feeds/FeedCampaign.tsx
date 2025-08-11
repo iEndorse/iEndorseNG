@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import CampaignMenu from "./CampaignMenu";
 import PromoteModal from "./PromoteModal";
 import link from '../svg/link.svg';
@@ -257,7 +257,7 @@ const { data: ApiFeedback, loading: ApiFeedbackLoading, error, postData } = useP
       <div className="flex items-center justify-between mb-3" >
           <div>
             <button className="bg-green-100 text-green-600 rounded-lg px-4 py-2 text-xs font-medium">
-            {item?.campaignUnit}  Points Left 
+            {item?.endorseCount}  Endorsements 
             </button>
           </div>
           <div onClick={openCampaignMenu} className="cursor-pointer">

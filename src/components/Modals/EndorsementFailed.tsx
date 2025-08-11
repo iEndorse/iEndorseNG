@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import close from '../svg/close.svg';
 import failed from '../svg/failed.svg'
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 import CampaignMenu from '../ViewCampaign/CampaignMenu';
 import Wallet from '../Wallet/Wallet';
 

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../NavBar/Navbar';
 import { baseURL } from '../URL';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 import NotificationsList from './NotificationsLists';
 import EndorsementsList from './EndorsementsLists';
 

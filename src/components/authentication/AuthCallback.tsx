@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { account } from '../../appwrite';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 
 const AuthCallback: React.FC = () => {
   const navigate = useNavigate();

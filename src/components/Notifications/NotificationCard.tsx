@@ -4,7 +4,7 @@ import send from '../svg/send.svg';
 import bell from '../svg/bell.svg';
 import { baseURL } from "../URL";
 import { Link } from "react-router-dom";
-import {toast} from 'react-toastify';
+import {toast} from 'sonner';
 
 const NotificationCard = ({item}: any) => {
    

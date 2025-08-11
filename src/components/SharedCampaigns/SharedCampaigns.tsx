@@ -5,7 +5,7 @@ import { Search, X } from 'lucide-react';
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { Puff } from "react-loader-spinner"
-import { toast } from "react-toastify"
+import { toast } from "sonner"
 import Navbar from "../NavBar/Navbar"
 import searchIcon from "./svg/search.svg"
 import closeIcon from "./svg/close.svg"

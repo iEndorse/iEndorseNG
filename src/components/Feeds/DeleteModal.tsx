@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import close from '../svg/close.svg';
 import redTrash from '../svg/redTrash.svg'
-import { toast } from 'react-toastify';
+import { toast } from "sonner";
 import { baseURL } from '../URL';
 import { LineWave } from 'react-loader-spinner';
 import { Backdrop, CircularProgress } from '@mui/material';
@@ -38,13 +38,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen, onClose, details, onC
             // Optionally show success message
             window.location.reload();
             toast.success('Campaign deleted successfully', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
+              
             });
            
             

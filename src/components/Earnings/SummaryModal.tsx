@@ -16,7 +16,7 @@ interface SummaryModalProps {
 const SummaryModal: React.FC<SummaryModalProps> = ({ isOpen, onClose, onSuccess, details }) => {
   const [loading, setLoading] = useState(false)
   const [apiResponse, setApiResponse] = useState<any>(null)
-  const [points, setPoints] = useState(0)
+ 
   const [accountId, setAccountId] = useState<any>(null)
   const [alertMessage, setAlertMessage] = useState<string>("")
   const [alertType, setAlertType] = useState<"success" | "error" | "">("")
@@ -35,7 +35,7 @@ const SummaryModal: React.FC<SummaryModalProps> = ({ isOpen, onClose, onSuccess,
 
   if (!isOpen) return null
 
-  const URL = `${baseURL}/Wallet/ReedeemPoint`
+  const URL = `${baseURL}/Wallet/ReedeemUserPoint?pointToRedeem=${details?.points}`
 
   const RedeemEarnedPoints = async () => {
     setLoading(true)
@@ -48,13 +48,9 @@ const SummaryModal: React.FC<SummaryModalProps> = ({ isOpen, onClose, onSuccess,
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          Authorization: `${window.localStorage.getItem("token")}`,
         },
-        body: JSON.stringify({
-          accountId: accountId,
-          redeemedPoints: points,
-          campaignId: 194,
-        }),
+      
       })
 
       if (!response.ok) {

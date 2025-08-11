@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import close from '../svg/close.svg';
 import editPen from '../svg/editPen.svg';
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import PhoneInput from 'react-phone-input-2';
 import { baseURL } from '../URL';
 import { Audio, LineWave } from 'react-loader-spinner';

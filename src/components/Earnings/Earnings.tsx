@@ -33,12 +33,12 @@ const Earnings = () => {
   const openWithdrawSuccessModal = () => setWithdrawSuccessModal(true)
   const closesWithdrawSuccessModal = () => setWithdrawSuccessModal(false)
   const openSummaryModal = () => setSummaryModal(true)
-  const closeSummaryModal = () => setSummaryModal(false)
+  const closeSummaryModal = () => {setSummaryModal(false); refreshPointsData()}
   const openEnterPasswordModal = () => setEnterPasswordModal(true)
   const closeEnterPasswordModal = () => setEnterPasswordModal(false)
   const navigate = useNavigate()
 
-  const redeemURL = `${baseURL}/Wallet/ReedeemPoint`
+  const redeemURL = `${baseURL}/Wallet/ReedeemUserPoint`
   const pointsUrl = `${baseURL}/Wallet/PointsProfile`
 
   const {

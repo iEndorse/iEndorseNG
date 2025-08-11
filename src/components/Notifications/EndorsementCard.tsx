@@ -4,7 +4,7 @@ import send from '../svg/send.svg';
 import bell from '../svg/bell.svg';
 import { Link } from "react-router-dom";
 import { baseURL } from "../URL";
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 
 const EndorsementCard = ({item}: any) => {
   

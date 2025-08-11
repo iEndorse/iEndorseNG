@@ -7,7 +7,7 @@ import bell from './svg/bell.svg'
 import search from './svg/search.svg'
 import arrow_left from './svg/arrow_left.svg'
 import { baseURL } from '../URL';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 import { Puff } from 'react-loader-spinner';
 import edit from '../svg/edit.svg'
 import edit2 from '../svg/edit2.svg'

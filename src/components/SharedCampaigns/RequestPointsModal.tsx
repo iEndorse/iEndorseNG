@@ -84,6 +84,7 @@ const RequestPointsModal = ({ onClose, onSuccess, campaignId }: ModalProps) => {
       formData.append('postUrl', linkInput);
       formData.append('campaignId', campaignId);
       formData.append('accountId', userId);
+
       
       // Add the image file to the form
       formData.append('image', uploadedImage);
@@ -103,7 +104,7 @@ const RequestPointsModal = ({ onClose, onSuccess, campaignId }: ModalProps) => {
       return data.totalPoints || 0;
     } catch (err) {
       console.error('Error calculating points:', err);
-      setError(err instanceof Error ? err.message : 'Failed to calculate points');
+      setError( 'Failed to calculate points');
       return 0;
     } finally {
       setIsCalculatingPoints(false);
@@ -192,7 +193,8 @@ const RequestPointsModal = ({ onClose, onSuccess, campaignId }: ModalProps) => {
         accountId: userId, 
         base64Resource: base64Resource,
         requestLink: linkInput,
-        pointsRequested: pointValue
+        pointsRequested: pointValue,
+        campaignId: campaignId,
       }
       
       // Actual API call
@@ -268,7 +270,7 @@ const RequestPointsModal = ({ onClose, onSuccess, campaignId }: ModalProps) => {
               } focus:outline-none focus:ring-2`}
             />
             <div className="flex justify-between items-center mt-1">
-              <span style={{ fontSize: '8px' }} className="bg-blue-100 px-2 py-1 rounded-md text-blue-500">This should be the link with the highest engagement</span>
+              <span style={{ fontSize: '8px' }} className="bg-blue-100 px-2 py-1 mt-2 rounded-md text-blue-500">This should be the link with the highest engagement</span>
               {fieldErrors.link && <span className="text-red-500 text-xs">{fieldErrors.link}</span>}
             </div>
           </div>
@@ -298,13 +300,13 @@ const RequestPointsModal = ({ onClose, onSuccess, campaignId }: ModalProps) => {
           ) : (
             <div className="mb-4">
               <label className="block w-full">
-                <div className={`bg-customBlue text-white p-2 rounded-md flex items-center justify-center cursor-pointer hover:bg-blue-800 transition-colors ${
+                <div className={`bg-gray-100 text-gray-700 p-2 rounded-md flex items-center justify-center cursor-pointer hover:bg-gray-400 transition-colors ${
                   fieldErrors.image ? 'border-2 border-red-500' : ''
                 }`}>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                   </svg>
-                  Upload campaign media
+                  Upload campaign media 
                 </div>
                 <input 
                   type="file" 
@@ -319,7 +321,7 @@ const RequestPointsModal = ({ onClose, onSuccess, campaignId }: ModalProps) => {
           
           {/* Show calculated points if available */}
           {(isCalculatingPoints || calculatedPoints > 0) && (
-            <div className="mb-4 p-2 bg-gray-50 border rounded">
+            <div className="mb-4 p-2 bg-gray-50 border rounded mt-4">
               <p className="text-sm text-gray-600">Points:</p>
               {isCalculatingPoints ? (
                 <p className="font-medium text-gray-400">Calculating...</p>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ThreeCircles, Puff } from 'react-loader-spinner';
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 import bg from '../../public/images/bg.svg';
 import bell from '../svg/bell.svg';
 import home from '../svg/home.svg';

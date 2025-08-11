@@ -41,7 +41,7 @@ const SignIn = () =>{
 
             <div className="flex-col max-w-sm space-y-2 justify-center ">
              <div className='text-center p-2'>
-                You need to sign in to enable you to endorse this campaign
+                You need to sign in to enable you to promote this campaign
              </div>
 
               

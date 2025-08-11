@@ -1,6 +1,6 @@
 import React, { useState, useEffect , useRef} from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import bell from '../svg/bell.svg';
 import home from '../svg/home.svg';
 import search from '../svg/search.svg';

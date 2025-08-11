@@ -4,7 +4,7 @@ import paystack from '../svg/paystack.svg'
 import paypal from '../svg/paypal.svg'
 import flutterwave from '../svg/flutterwave.svg'
 import stripe from '../svg/stripe.svg'
-import { toast } from 'react-toastify';
+import { toast } from 'sonner';
 
 interface PaymentMethodProps {
   isOpen: boolean;

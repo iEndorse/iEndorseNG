@@ -76,7 +76,7 @@ const EndorseCampaignModal: React.FC<EndorseCampaignModalProps> = ({ isOpen, onC
         </div>
         <div className="relative bg-white rounded-lg shadow">
           <div className="p-4 md:p-5">
-            <h1 className="text-center font-bold mb-4">Endorse Campaign </h1>
+            <h1 className="text-center font-bold mb-4">Promote Campaign </h1>
 
             <div className="flex-col max-w-sm space-y-2 justify-center mb-10">
               <div>
