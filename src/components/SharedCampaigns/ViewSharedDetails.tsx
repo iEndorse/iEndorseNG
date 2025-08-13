@@ -172,6 +172,10 @@ const ViewSharedDetails = ({ item }: any) => {
                     <div>
                       <span>Shared Date: {formatDate(campaignData?.sharedDate)}</span> 
                     </div>
+                     <div>
+                      <span>Campaign End Date: {formatDate(campaignData?.campaignEndDate)}</span> 
+                    </div>
+                    
                     <div> 
                       <span>Points Earned: {campaignData.pointEarned}</span>
                     </div>

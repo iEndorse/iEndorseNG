@@ -41,7 +41,7 @@ const userId = useParams().userId
     loadDefaultData()
   }, [userId, navigate])
 
-  const url = `${baseURL}/Campaign/UserCampaigns?AccountId=${4}&pageNumber=${page}&pageSize=10` 
+  const url = `${baseURL}/Campaign/UserCampaigns?AccountId=${userId}&pageNumber=${page}&pageSize=10` 
 
   const loadDefaultData = async () => {
     //if (!userId) return // Guard clause to prevent fetch without userId

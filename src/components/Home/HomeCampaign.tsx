@@ -1,8 +1,6 @@
-"use client"
-
 import { useEffect, useState, useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { Play, Pause } from "lucide-react"
+import { Play, Pause, MonitorOff } from "lucide-react"
 import share from "../svg/share.svg"
 import endorse from "../svg/endorse.svg"
 import Initials from "../Initials"
@@ -16,6 +14,7 @@ import { baseURL } from "../URL"
 import usePost from "../Hooks/usePost"
 import { toast } from "sonner"
 import { isAuthenticated } from "../authentication/auth"
+import { MonitorCheck } from "lucide-react"
 import SignInFirst from "./SignInFirst"
 import Carousel from "react-material-ui-carousel"
 import "slick-carousel/slick/slick.css"
@@ -304,7 +303,7 @@ const HomeCampaign = ({ item }: any, index: any) => {
             </button>
           </div>
         </div>
-        <Link to={`/userprofile/${item?.campaignOwner}`}>
+        <Link to={`/userprofile/${item?.accountId}`}>
           <div className="flex items-start justify-between sm:flex-wrap">
             <div className="flex items-center gap-3">
               <div className="inline-block z-1">
@@ -337,10 +336,20 @@ const HomeCampaign = ({ item }: any, index: any) => {
         <div onClick={() => handleItemClick(item?.campaignId)} className="cursor-pointer">
           <div className="my-4">
             <h1 className="font-medium text-lg truncate">{item?.campaignTitle}</h1>
+                  <div>
+         
+               {item?.isCampaignActive ? 
+               <span className="text-green-600 font-medium">
+                 <MonitorCheck className="inline w-4 h-4" /> Active</span> : 
+               <span className="text-red-600 font-medium"> 
+               <MonitorOff className="inline w-4 h-4" />  Inactive</span>}
+              </div> 
             <div className="mt-2">
+           
               <p className="text-justify text-sm" style={{ whiteSpace: "pre-line" }}>
                 {isExpanded ? item?.description : `${item?.description.slice(0, maxLength)}...`}
               </p>
+           
               {item?.description?.length > maxLength && (
                 <button onClick={toggleReadMore} className="text-customBlue font-medium mt-2">
                   {isExpanded ? "Read Less" : "Read More"}
@@ -431,7 +440,7 @@ const HomeCampaign = ({ item }: any, index: any) => {
           </div>
           <div className="flex items-center cursor-pointer" onClick={openEndorseMenu}>
             <img src={endorse || "/placeholder.svg"} width={20} height={20} className="mr-2" alt="endorse" />
-            <span>Promote</span>
+            <span>Endorse</span>
           </div>
         </div>
       </div>

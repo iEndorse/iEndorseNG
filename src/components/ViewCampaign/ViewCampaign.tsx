@@ -28,6 +28,7 @@ import tiktok from '../svg/tiktok.svg';
 import facebook from '../svg/facebook.svg';
 import instagram from '../svg/instagram.svg';
 import close from '../svg/close.svg';
+import { MonitorCheck, MonitorOff } from "lucide-react";
 import EndorsementSuccessfulModal from "../Modals/EndorsementSuccessfulModal";
 import Initials from "../Initials";
 import ReportCampaign from "./ReportCampaign";
@@ -321,7 +322,16 @@ const ViewCampaign = ({ item }: any) => {
                 </div>
 
                 <div className="my-4 campaign-container min-w-[300px] max-w-[648px] ">
+                
                   <h1 className="font-medium">{campaignData?.campaignTitle}</h1>
+                              <div>
+         
+               {campaignData?.isCampaignActive ? 
+               <span className="text-green-600 font-medium">
+                 <MonitorCheck className="inline w-4 h-4" /> Active</span> : 
+               <span className="text-red-600 font-medium"> 
+               <MonitorOff className="inline w-4 h-4" />  Inactive</span>}
+              </div> 
                   <p className="flex my-2 text-customBlue font-medium text-justify">
                   <a
                     href={
@@ -339,7 +349,10 @@ const ViewCampaign = ({ item }: any) => {
 
                   <div className="text-justify  sm:min-w-[500px] max-w-[648px] my-2 pb-3 description-container">
                     <div className="px-2" style={{ whiteSpace: 'pre-line' }}>{campaignData?.description}</div>
-                    <p className="text-justify text-xs py-2">{formatDate(campaignData?.created)}</p>
+                    <div className="py-2">
+                    <p className="text-justify text-xs "> <span> Date Created</span>{formatDate(campaignData?.created)}</p>
+                         <p className="text-justify text-xs "> <span> End Date : </span>{formatDate(campaignData?.created)}</p>
+                         </div>
                   </div>
                 </div>
 
@@ -406,7 +419,7 @@ const ViewCampaign = ({ item }: any) => {
                     </button>
                   </div>
                   <div className="flex items-center w-full">
-                    <button className="p-3 bg-customBlue   text-xs  text-white rounded-md w-full" onClick={openEndorseMenu} >Promote Campaign</button>
+                    <button className="p-3 bg-customBlue   text-xs  text-white rounded-md w-full" onClick={openEndorseMenu} >Endorse Campaign</button>
                   </div>
                 </div>
               </div>
