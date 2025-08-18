@@ -295,12 +295,13 @@ const HomeCampaign = ({ item }: any, index: any) => {
         {/* Header Section */}
         <div className="flex items-start justify-end sm:flex-wrap">
           <div className="mt-1 sm:mt-0">
-            <button
-              className="bg-green-100 text-green-600 rounded-lg px-2 py-1 font-medium"
-              style={{ fontSize: "0.7rem" }}
-            >
-              {item?.endorseCount} Endorsements
-            </button>
+               <div>
+               {item?.isCampaignActive ? 
+               <span className="text-green-600 font-medium">
+                 <MonitorCheck className="inline w-4 h-4" /> Active</span> : 
+               <span className="text-red-600 font-medium"> 
+               <MonitorOff className="inline w-4 h-4" />  Inactive</span>}
+              </div> 
           </div>
         </div>
         <Link to={`/userprofile/${item?.accountId}`}>
@@ -336,14 +337,7 @@ const HomeCampaign = ({ item }: any, index: any) => {
         <div onClick={() => handleItemClick(item?.campaignId)} className="cursor-pointer">
           <div className="my-4">
             <h1 className="font-medium text-lg truncate">{item?.campaignTitle}</h1>
-                  <div>
-         
-               {item?.isCampaignActive ? 
-               <span className="text-green-600 font-medium">
-                 <MonitorCheck className="inline w-4 h-4" /> Active</span> : 
-               <span className="text-red-600 font-medium"> 
-               <MonitorOff className="inline w-4 h-4" />  Inactive</span>}
-              </div> 
+          
             <div className="mt-2">
            
               <p className="text-justify text-sm" style={{ whiteSpace: "pre-line" }}>
@@ -433,16 +427,27 @@ const HomeCampaign = ({ item }: any, index: any) => {
         </div>
 
         {/* Actions Section */}
-        <div className="flex mt-4 mb-3 text-sm gap-5">
+        <div className="flex mt-4 mb-3 text-sm gap-5 justify-between items-center">
+          <div className="flex"> 
           <div className="flex items-center cursor-pointer" onClick={openShareCampaignModal}>
-            <img src={share || "/placeholder.svg"} width={20} height={20} className="mr-2" alt="share" />
+            <img src={share || "/placeholder.svg"} width={20} height={20} className="mr-1" alt="share" />
             <span>Share</span>
           </div>
-          <div className="flex items-center cursor-pointer" onClick={openEndorseMenu}>
-            <img src={endorse || "/placeholder.svg"} width={20} height={20} className="mr-2" alt="endorse" />
+          <div className=" ml-2 flex items-center cursor-pointer" onClick={openEndorseMenu}>
+            <img src={endorse || "/placeholder.svg"} width={20} height={20} className="mr-1" alt="endorse" />
             <span>Endorse</span>
           </div>
+          </div>
+          <div>
+                <button
+              className="bg-green-100 text-green-600 rounded-lg px-2 py-1 font-medium"
+              style={{ fontSize: "0.7rem" }}
+            >
+              {item?.endorseCount} Endorsements
+            </button>
+          </div>
         </div>
+
       </div>
 
       <EndorseCampaignModal isOpen={endorseMenu} onClose={closeEndorseMenu} onSubmit={submitEndorsement} />

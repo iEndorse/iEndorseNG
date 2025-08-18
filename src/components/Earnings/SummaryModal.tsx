@@ -2,24 +2,38 @@
 
 import type React from "react"
 import { useEffect, useState } from "react"
-import close from "../svg/close.svg"
 import { LineWave } from "react-loader-spinner"
 import { baseURL } from "../URL"
 
 interface SummaryModalProps {
   isOpen: boolean
   onClose: () => void
-  onSuccess: () => void // Add this line
+  onSuccess: () => void
   details: any
 }
+
+const CloseIcon = () => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="cursor-pointer"
+  >
+    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
 
 const SummaryModal: React.FC<SummaryModalProps> = ({ isOpen, onClose, onSuccess, details }) => {
   const [loading, setLoading] = useState(false)
   const [apiResponse, setApiResponse] = useState<any>(null)
- 
   const [accountId, setAccountId] = useState<any>(null)
   const [alertMessage, setAlertMessage] = useState<string>("")
   const [alertType, setAlertType] = useState<"success" | "error" | "">("")
+
+  const hasInsufficientBalance = details?.points > details?.pointsBalance
+  const isRedeemDisabled = loading || hasInsufficientBalance
 
   useEffect(() => {
     const userDataString = window.localStorage.getItem("userData")
@@ -33,11 +47,30 @@ const SummaryModal: React.FC<SummaryModalProps> = ({ isOpen, onClose, onSuccess,
     }
   }, [])
 
+  useEffect(() => {
+    if (hasInsufficientBalance) {
+      setAlertMessage("Insufficient balance. You cannot redeem more points than your available balance.")
+      setAlertType("error")
+    } else {
+      // Clear error message when balance is sufficient
+      if (alertType === "error" && alertMessage.includes("Insufficient balance")) {
+        setAlertMessage("")
+        setAlertType("")
+      }
+    }
+  }, [hasInsufficientBalance, details?.points, details?.pointsBalance])
+
   if (!isOpen) return null
 
   const URL = `${baseURL}/Wallet/ReedeemUserPoint?pointToRedeem=${details?.points}`
 
   const RedeemEarnedPoints = async () => {
+    if (hasInsufficientBalance) {
+      setAlertMessage("Cannot proceed: Insufficient balance")
+      setAlertType("error")
+      return
+    }
+
     setLoading(true)
     // Clear previous alerts
     setAlertMessage("")
@@ -50,7 +83,6 @@ const SummaryModal: React.FC<SummaryModalProps> = ({ isOpen, onClose, onSuccess,
           "Content-Type": "application/json",
           Authorization: `${window.localStorage.getItem("token")}`,
         },
-      
       })
 
       if (!response.ok) {
@@ -59,22 +91,15 @@ const SummaryModal: React.FC<SummaryModalProps> = ({ isOpen, onClose, onSuccess,
 
       const responseData = await response.json()
 
-      // Set the API response in state
+      console.log("Response Data:", responseData)
       setApiResponse(responseData.data)
 
       if (responseData) {
-        // Display success message within the component
-        // setAlertMessage("Points Redeemed Successfully")
-        // setAlertType("success")
         console.log(responseData)
-        onSuccess() // Call the onSuccess function passed as a prop
-
-        // Wait a short time before transitioning to success modal
-   
+        onSuccess()
       }
     } catch (err) {
       console.error((err as Error).message)
-      // Display error message within the component
       setAlertMessage("Something went wrong")
       setAlertType("error")
     } finally {
@@ -91,7 +116,7 @@ const SummaryModal: React.FC<SummaryModalProps> = ({ isOpen, onClose, onSuccess,
             className="bg-transparent border-0 text-black text-3xl leading-none font-semibold outline-none focus:outline-none"
             onClick={onClose}
           >
-            <img src={close || "/placeholder.svg"} alt="x" width={40} height={40} />
+            <CloseIcon />
           </span>
         </div>
 
@@ -133,8 +158,12 @@ const SummaryModal: React.FC<SummaryModalProps> = ({ isOpen, onClose, onSuccess,
 
             <button
               onClick={() => RedeemEarnedPoints()}
-              disabled={loading}
-              className="w-full flex text-white items-center justify-center bg-customBlue hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center"
+              disabled={isRedeemDisabled}
+              className={`w-full flex text-white items-center justify-center font-medium rounded-lg text-sm px-5 py-2 text-center ${
+                isRedeemDisabled
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-customBlue hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300"
+              }`}
             >
               {loading ? <LineWave height="30" width="30" color="white" ariaLabel="loading" /> : "Proceed"}
             </button>
